@@ -3,8 +3,8 @@ import { View, Button, StyleSheet, Text, Image, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as Camera from "expo-camera";
 
-import Colors from "../../../constants/Colors";
 import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
+import colors from "../../../constants/Colors";
 
 type imageType = {
 	onImageTaken?: any;
@@ -47,11 +47,13 @@ const ImgPicker: React.FC<imageType> = ({ onImageTaken }) => {
 				) : (
 					<Image style={styles.image} source={{ uri: pickedImage }} />
 				)}
-				<Button
-					title="Take Image"
-					color={Colors.primary}
-					onPress={takeImageHandler}
-				/>
+				<View style={{ marginTop: 5 }}>
+					<Button
+						title="Take Image"
+						color={colors.primary}
+						onPress={takeImageHandler}
+					/>
+				</View>
 			</View>
 		</View>
 	);
@@ -69,7 +71,6 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		borderColor: "#ccc",
-		borderWidth: 1,
 	},
 	image: {
 		width: "100%",

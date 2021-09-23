@@ -10,21 +10,22 @@ import PlaceDetailScreen, {
 import NewPlaceScreen, {
 	NewPlaceScreenOptions,
 } from "../components/screens/NewPlaceScreen";
-import MapScreen from "../components/screens/MapScreen";
+import MapScreen, { MapScreenOptions } from "../components/screens/MapScreen";
 import Colors from "../constants/Colors";
+import MapView from "react-native-maps";
+
+const defaultStackNavOptions = {
+	headerStyle: {
+		backgroundColor: Colors.primary,
+	},
+};
 
 const Stack = createStackNavigator();
 
 const PlacesNavigator = () => {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator
-				screenOptions={{
-					headerStyle: {
-						backgroundColor: Colors.primary,
-					},
-				}}
-			>
+			<Stack.Navigator screenOptions={defaultStackNavOptions}>
 				<Stack.Screen
 					name="Places"
 					component={PlacesListScreen}
@@ -40,7 +41,11 @@ const PlacesNavigator = () => {
 					component={NewPlaceScreen}
 					options={NewPlaceScreenOptions}
 				/>
-				<Stack.Screen name="Map" component={MapScreen} />
+				<Stack.Screen
+					name="Map"
+					component={MapScreen}
+					options={MapScreenOptions}
+				/>
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

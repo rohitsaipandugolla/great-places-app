@@ -1,5 +1,5 @@
-import { NavigationProp } from "@react-navigation/native";
-import React, { useState } from "react";
+import { NavigationProp, RouteProp } from "@react-navigation/native";
+import React, { useCallback, useState } from "react";
 import {
 	ScrollView,
 	View,
@@ -9,18 +9,24 @@ import {
 	StyleSheet,
 } from "react-native";
 import { useDispatch } from "react-redux";
+import colors from "../../constants/Colors";
 
-import Colors from "../../constants/Colors";
-import * as placesActions from "../../store/places-actions";
+import * as placeActions from "../../store/places-actions";
 import ImagePicker from "../organisms/ImagePicker/ImagePicker";
+import LocationPicker from "../organisms/LocationPicker/LocationPicker";
 
 type NewPlaceScreenProps = {
 	navigation?: NavigationProp<any>;
+	route?: RouteProp<any>;
 };
 
-const NewPlaceScreen: React.FC<NewPlaceScreenProps> = ({ navigation }) => {
+const NewPlaceScreen: React.FC<NewPlaceScreenProps> = ({
+	navigation,
+	route,
+}) => {
 	const [titleValue, setTitleValue] = useState("");
 	const [selectedImage, setSelectedImage] = useState<string>("");
+	const [selectedLocation, setSelectedLocation] = useState({});
 
 	const dispatch = useDispatch();
 
@@ -29,13 +35,19 @@ const NewPlaceScreen: React.FC<NewPlaceScreenProps> = ({ navigation }) => {
 	};
 
 	const savePlaceHandler = () => {
-		dispatch(placesActions.addPlace(titleValue, selectedImage));
+		dispatch(
+			placeActions.addPlace(titleValue, selectedImage, selectedLocation)
+		);
 		navigation!.goBack();
 	};
 
 	const imageTakenHandler = (imagePath: string) => {
 		setSelectedImage(imagePath);
 	};
+	const locationPickedHandler = useCallback(location => {
+		setSelectedLocation(location);
+		console.log("newPlace----->", location);
+	}, []);
 
 	return (
 		<ScrollView>
@@ -47,9 +59,14 @@ const NewPlaceScreen: React.FC<NewPlaceScreenProps> = ({ navigation }) => {
 					value={titleValue}
 				/>
 				<ImagePicker onImageTaken={imageTakenHandler} />
+				<LocationPicker
+					navigation={navigation}
+					route={route}
+					onLocationPicked={locationPickedHandler}
+				/>
 				<Button
 					title="Save Place"
-					color={Colors.primary}
+					color={colors.primary}
 					onPress={savePlaceHandler}
 				/>
 			</View>
