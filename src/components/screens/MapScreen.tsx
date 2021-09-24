@@ -8,7 +8,7 @@ import {
 	TouchableOpacity,
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
-import Colors from "../../constants/Colors";
+import colors from "../../constants/Colors";
 
 type MapScreenProps = {
 	navigation?: NavigationProp<any>;
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
 	},
 	headerButtonText: {
 		fontSize: 16,
-		color: Platform.OS === "android" ? "white" : Colors.primary,
+		color: Platform.OS === "android" ? "white" : colors.primary,
 	},
 	headerButton: {
 		marginHorizontal: 20,

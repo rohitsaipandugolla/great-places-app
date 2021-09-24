@@ -85,10 +85,10 @@ export const loadPlaces = () => {
 	) => {
 		try {
 			const dbPlacesResult: any = await fetchPlaces();
-			console.log(dbPlacesResult);
+			//	console.log(dbPlacesResult);
 			dispatch({
 				type: SET_PLACES,
-				places: [dbPlacesResult.rows._array[0]],
+				places: [dbPlacesResult.rows._array],
 			});
 		} catch (err) {
 			throw err;

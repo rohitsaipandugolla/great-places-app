@@ -1,22 +1,22 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import PlacesListScreen, {
-	PlacesListScreenOptions,
-} from "../components/screens/PlaceListScreen";
-import PlaceDetailScreen, {
-	PlaceDetailScreenOptions,
-} from "../components/screens/PlaceDetailScreen";
+
+import MapScreen, { MapScreenOptions } from "../components/screens/MapScreen";
 import NewPlaceScreen, {
 	NewPlaceScreenOptions,
 } from "../components/screens/NewPlaceScreen";
-import MapScreen, { MapScreenOptions } from "../components/screens/MapScreen";
-import Colors from "../constants/Colors";
-import MapView from "react-native-maps";
+import PlaceDetailScreen, {
+	PlaceDetailScreenOptions,
+} from "../components/screens/PlaceDetailScreen";
+import PlacesListScreen, {
+	PlacesListScreenOptions,
+} from "../components/screens/PlaceListScreen";
+import colors from "../constants/Colors";
 
 const defaultStackNavOptions = {
 	headerStyle: {
-		backgroundColor: Colors.primary,
+		backgroundColor: colors.primary,
 	},
 };
 
